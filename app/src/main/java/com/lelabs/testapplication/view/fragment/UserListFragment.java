@@ -47,7 +47,7 @@ public class UserListFragment extends BaseFragment {
         userViewModel.getAllUsers().observe(this, userModels -> {
             dismissProgress();
             userListAdapter.setDataList(userModels);
-            total_td.setText(userModels.size());
+            total_td.setText("Total "+userModels.size()+" users found!");
 
         });
 
