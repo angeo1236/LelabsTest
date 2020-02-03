@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 
+import com.lelabs.testapplication.app.TestAppClass;
 import com.lelabs.testapplication.data.UserModel;
 import com.lelabs.testapplication.retrofit.ApiClient;
 import com.lelabs.testapplication.retrofit.ApiInterface;
@@ -28,7 +29,7 @@ public class UserViewModel extends AndroidViewModel {
     public MutableLiveData<List<UserModel>> getAllUsers() {
 
         final MutableLiveData<List<UserModel>> modelMutableLiveData = new MutableLiveData<>();
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface apiService = ApiClient.getClient(TestAppClass.getContext()).create(ApiInterface.class);
 
         Call<List<UserModel>> call = apiService.get_homepage_data();
         String URL = call.request().url().toString();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,24 +20,38 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_30sdp"
-            android:text="Users List"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="User Name" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:id="@+id/total_td"
             android:layout_marginTop="@dimen/_70sdp"
-            android:text="Total 0 users found"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:src="@drawable/phone1"
+                android:tint="@color/white"
+                android:layout_height="@dimen/_15sdp"/>
+            <TextView
+                android:id="@+id/total_td"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                tools:text="9444290578" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:id="@+id/users_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

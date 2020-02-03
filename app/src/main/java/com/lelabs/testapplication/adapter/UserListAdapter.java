@@ -4,13 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.lelabs.testapplication.R;
 import com.lelabs.testapplication.data.UserModel;
+import com.lelabs.testapplication.utils.UtilMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,7 @@ import java.util.List;
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
 
 
-    private List<UserModel> userModelsList=new ArrayList<>();
-
+    private List<UserModel> userModelsList = new ArrayList<>();
 
 
     public List<UserModel> getStudentist() {
@@ -42,8 +42,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.phone_tv.setText(userModelsList.get(position).getPhone());
+        holder.letters_td.setText(UtilMethods.getFirstTwo(userModelsList.get(position).getName()));
         holder.name_tv.setText(userModelsList.get(position).getName());
-        holder.full_layout.setOnClickListener(v->{
+        holder.full_layout.setOnClickListener(v -> {
 //            MainActivity.
         });
     }
@@ -54,16 +55,16 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout full_layout;
-        TextView phone_tv, name_tv;
+        RelativeLayout full_layout;
+        TextView phone_tv, name_tv, letters_td;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            letters_td = itemView.findViewById(R.id.letters_td);
             phone_tv = itemView.findViewById(R.id.phone_tv);
             name_tv = itemView.findViewById(R.id.name_tv);
             full_layout = itemView.findViewById(R.id.full_layout);
