@@ -3,7 +3,6 @@ package com.lelabs.testapplication.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lelabs.testapplication.R;
 import com.lelabs.testapplication.data.UserModel;
+import com.lelabs.testapplication.interfaces.RecyclerViewInterface;
 import com.lelabs.testapplication.utils.UtilMethods;
 
 import java.util.ArrayList;
@@ -20,8 +20,12 @@ import java.util.List;
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
 
 
+    RecyclerViewInterface viewInterface;
     private List<UserModel> userModelsList = new ArrayList<>();
 
+    public UserListAdapter(RecyclerViewInterface viewInterface) {
+        this.viewInterface = viewInterface;
+    }
 
     public List<UserModel> getStudentist() {
         return userModelsList;
@@ -45,7 +49,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
         holder.letters_td.setText(UtilMethods.getFirstTwo(userModelsList.get(position).getName()));
         holder.name_tv.setText(userModelsList.get(position).getName());
         holder.full_layout.setOnClickListener(v -> {
-//            MainActivity.
+            viewInterface.onItemClick(userModelsList.get(position));
         });
     }
 

@@ -11,7 +11,7 @@ public class AddressModel implements Serializable {
     private String city;
     private String zipcode;
     private GeoModel geo;
-    class GeoModel{
+    public class GeoModel{
         private String lat;
         private String lng;
 

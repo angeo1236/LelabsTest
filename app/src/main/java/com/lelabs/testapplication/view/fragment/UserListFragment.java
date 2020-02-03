@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lelabs.testapplication.R;
 import com.lelabs.testapplication.adapter.UserListAdapter;
 import com.lelabs.testapplication.data.UserModel;
+import com.lelabs.testapplication.interfaces.RecyclerViewInterface;
 import com.lelabs.testapplication.viewmodel.UserViewModel;
 
 
 /**
  * Created by angeooo on 28-Jan-20.
  */
-public class UserListFragment extends BaseFragment {
+public class UserListFragment extends BaseFragment implements RecyclerViewInterface {
 
     private RecyclerView users_rv;
     private UserListAdapter userListAdapter;
@@ -40,7 +41,7 @@ public class UserListFragment extends BaseFragment {
         users_rv = view.findViewById(R.id.users_rv);
         total_td = view.findViewById(R.id.total_td);
 
-        userListAdapter = new UserListAdapter();
+        userListAdapter = new UserListAdapter(this::onItemClick);
 
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         showProgress();
@@ -63,12 +64,18 @@ public class UserListFragment extends BaseFragment {
         try {
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragment.setArguments(bundle);
-            fragmentTransaction.replace(R.id.container_layout, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
+            fragmentTransaction.addToBackStack("Userlist");
+            fragmentTransaction.add(R.id.container_layout, fragment);
+            fragmentTransaction.commit();
 
         } catch (Exception e) {
             // TODO: handle exception
         }
 
+    }
+
+    @Override
+    public void onItemClick(UserModel userModel) {
+        replaceFragment(new UserDetailFragment(),userModel);
     }
 }
